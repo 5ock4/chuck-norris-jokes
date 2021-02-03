@@ -44,9 +44,8 @@ export default function SimpleCard() {
           <br />
           {'"a benevolent smile"'}
         </Typography> */}
-        <Typography variant="h5" component="h2">
-          I am much better than coronavirus. I am much better than coronavirus. I am much better than coronavirus.
-          I am much better than coronavirus.
+        <Typography variant="p6" component="h2" align='center'>
+          I am much better than coronavirus. 
         </Typography>
       </CardContent>
       <CardActions>
