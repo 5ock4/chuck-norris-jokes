@@ -1,4 +1,3 @@
-import './App.css';
 import {Box, Container} from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles'
 import CssBaseline from "@material-ui/core/CssBaseline"
@@ -10,7 +9,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline/>
-      <Container maxWidth='sm'>
+      <Container maxWidth='md'>
         <Box my={4}>
           <Jokes/>
         </Box>
