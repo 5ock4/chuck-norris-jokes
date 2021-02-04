@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import {Box, Container} from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles'

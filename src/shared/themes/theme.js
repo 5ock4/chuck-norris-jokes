@@ -9,7 +9,7 @@ const theme = createMuiTheme({
         },
         body: {
           textAlign: 'center',
-          backgroundImage: 'linear-gradient(to right top, #ffffff, #f1f1f1, #e2e2e2, #d4d4d4, #c6c6c6)',
+          backgroundImage: 'linear-gradient(to right top, #ffffff, #f1f1f1, #e4e4e4, #d6d6d6, #c9c9c9);',
         }
       }
     }
