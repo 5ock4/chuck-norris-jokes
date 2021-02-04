@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
+import axios from 'axios';
+import {useDispatch, useSelector} from 'react-redux'
 
+import {fetchJokes, jokesSelector} from '../../shared/slices/joke'
 import JokeCard from '../components/JokeCard'
 import JokeCategories from '../components/JokeCategories'
 import JokeForm from '../components/JokeForm'
@@ -19,6 +22,16 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Jokes = () => {
+  const dispatch = useDispatch()
+  const {joke, loading, hasErrors} = useSelector(jokesSelector)
+
+  useEffect(() => {
+    dispatch(fetchJokes())
+  }, [dispatch])
+
+  console.log('Jokes:')
+  console.log(joke)
+
   const classes = useStyles();
 
   return (
