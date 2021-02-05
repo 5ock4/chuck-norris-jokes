@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {Paper, Button, Card, CardActions, CardContent} from '@material-ui/core';
+import {Paper, CircularProgress, Card, CardContent} from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import {useDispatch, useSelector} from 'react-redux'
 
@@ -32,7 +32,7 @@ const JokeCard = (props) => {
 
   useEffect(() => {
     dispatch(fetchJokes())
-  }, [dispatch])
+  }, [])
 
   const handleOnClick = () => {
     console.log('clicking paper')
@@ -48,9 +48,10 @@ const JokeCard = (props) => {
     >
       <Card>
         <CardContent>
-          <Typography variant="body1" align='left'>
+          {loading && <CircularProgress/>}
+          {!loading && <Typography variant="body1" align='left'>
             {joke}
-          </Typography>
+          </Typography>}
         </CardContent>
       </Card>
     </Paper>
