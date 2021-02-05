@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
-import axios from 'axios';
 import {useDispatch, useSelector} from 'react-redux'
 
 import {fetchJokes, jokesSelector} from '../../shared/slices/joke'
@@ -15,6 +14,7 @@ const useStyles = makeStyles(theme => ({
   pos: {
     [theme.breakpoints.up('sm')]: {
       display: 'flex',
+      justifyContent: 'center',
       alignItems: 'center',
       padding: '20px'
     },
@@ -22,15 +22,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Jokes = () => {
-  const dispatch = useDispatch()
-  const {joke, loading, hasErrors} = useSelector(jokesSelector)
+  // const dispatch = useDispatch()
+  // const {joke, loading, hasErrors} = useSelector(jokesSelector)
 
-  useEffect(() => {
-    dispatch(fetchJokes())
-  }, [dispatch])
-
-  console.log('Jokes:')
-  console.log(joke)
+  // useEffect(() => {
+  //   dispatch(fetchJokes())
+  // }, [dispatch])
 
   const classes = useStyles();
 

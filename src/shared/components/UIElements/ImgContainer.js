@@ -4,8 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    marginRight: '2em',
-    marginBottom: '1em'
+    marginRight: theme.spacing(4),
+    marginBottom: theme.spacing(2)
   }
 }));
 

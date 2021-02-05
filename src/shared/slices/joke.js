@@ -4,7 +4,7 @@ import axios from 'axios'
 export const initialState = {
   loading: false,
   hasErrors: false,
-  joke: 'Initial joke',
+  joke: null,
 }
 
 const jokesSlice = createSlice({
@@ -41,7 +41,7 @@ export function fetchJokes() {
     dispatch(getJokes())
 
     try {
-      const response = await axios.get(process.env.REACT_APP_CORS_PROXY + process.env.REACT_APP_CHUCK_NORRIS_JOKES_API + '/random')
+      const response = await axios.get(process.env.REACT_APP_CHUCK_NORRIS_JOKES_API + '/random')
       const data = response.data.value
       console.log(data)
       dispatch(getJokesSuccess(data))

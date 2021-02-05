@@ -1,66 +1,60 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
+import {Paper, Button, Card, CardActions, CardContent} from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
+import {useDispatch, useSelector} from 'react-redux'
+
+import {fetchJokes, jokesSelector} from '../../shared/slices/joke'
 
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
 });
 
-export default function SimpleCard() {
+const JokeCard = (props) => {
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
+  const [elevation, setElevation] = useState(0);
+
+  const handleOnMouseMove = () => {
+    setElevation(5)
+  }
+
+  const handleOnMouseOut = () => {
+    setElevation(0)
+  }
+
+  const dispatch = useDispatch()
+  const {joke, loading, hasErrors} = useSelector(jokesSelector)
+
+  useEffect(() => {
+    dispatch(fetchJokes())
+  }, [dispatch])
+
+  const handleOnClick = () => {
+    console.log('clicking paper')
+    dispatch(fetchJokes())
+  }
 
   return (
-    <Card className={classes.root}>
-      <CardContent>
-        {/* <Typography className={classes.title} color="textSecondary" gutterBottom>
-          Word of the Day
-        </Typography>
-        <Typography variant="h5" component="h2">
-          be{bull}nev{bull}o{bull}lent
-        </Typography>
-        <Typography className={classes.pos} color="textSecondary">
-          adjective
-        </Typography>
-        <Typography variant="body2" component="p">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
-        </Typography> */}
-        <Typography variant="body1" component="h2" align='left'>
-          I am much better than coronavirus. I am much better than coronavirus.
-          I am much better than coronavirus. I am much better than coronavirus.
-          I am much better than coronavirus.
-          I am much better than coronavirus.
-          I am much better than coronavirus.
-          I am much better than coronavirus.
-          I am much better than coronavirus.
-          I am much better than coronavirus.
-          I am much better than coronavirus.
-          I am much better than coronavirus.
-          I am much better than coronavirus.
-        </Typography>
-      </CardContent>
-      <CardActions>
-        {/* <Button size="small">Learn More</Button> */}
-      </CardActions>
-    </Card>
+    <Paper elevation={elevation} 
+           onMouseMove={handleOnMouseMove}
+           onMouseOut={handleOnMouseOut}
+           className={classes.root}
+           onClick={handleOnClick}
+    >
+      <Card>
+        <CardContent>
+          <Typography variant="body1" align='left'>
+            {joke}
+          </Typography>
+        </CardContent>
+      </Card>
+    </Paper>
   );
 }
+
+export default JokeCard;
