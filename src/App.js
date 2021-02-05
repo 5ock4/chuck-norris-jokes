@@ -12,7 +12,7 @@ const App = () => {
       {/* TODO: fix this */}
       <Helmet>
           <meta charSet="utf-8" />
-          <title>My Title</title>
+          <title>Chuck Norris - Jokes</title>
           <link rel="canonical" href="http://example.com" />
       </Helmet>
       <CssBaseline/>

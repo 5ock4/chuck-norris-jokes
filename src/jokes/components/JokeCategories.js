@@ -1,6 +1,9 @@
-import React from 'react';
+import { React, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Chip } from '@material-ui/core';
+import {useDispatch, useSelector} from 'react-redux'
+
+import {fetchCategories, categoriesSelector} from '../../shared/slices/categories'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,13 +22,13 @@ const useStyles = makeStyles((theme) => ({
 
 const JokeCategories = (props) => {
   const classes = useStyles();
-  const [chipData, setChipData] = React.useState([
-    { key: 0, label: 'Cat1' },
-    { key: 1, label: 'Cat2' },
-    { key: 2, label: 'Cat3' },
-    { key: 3, label: 'Cat4' },
-    { key: 4, label: 'Cat5' },
-  ]);
+
+  const dispatch = useDispatch()
+  const {categories, loading, hasErrors} = useSelector(categoriesSelector)
+
+  useEffect(() => {
+    dispatch(fetchCategories())
+  }, [])
 
   const handleClick = () => {
     console.info('You clicked the Chip.');
@@ -33,11 +36,11 @@ const JokeCategories = (props) => {
 
   return(
     <div className={classes.root}>
-      {chipData.map((data) => {
+      {categories.map((data, index) => {
         return (
-          <li key={data.key}>
+          <li key={index}>
             <Chip
-              label={data.label}
+              label={data}
               onClick={handleClick}
               color='primary'
               className={classes.chip}

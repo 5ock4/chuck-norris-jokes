@@ -3,9 +3,10 @@ import { Paper, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    marginRight: theme.spacing(4),
-    marginBottom: theme.spacing(2)
+  [theme.breakpoints.up('sm')]: {
+    container: {
+      marginRight: theme.spacing(4),
+    }
   }
 }));
 

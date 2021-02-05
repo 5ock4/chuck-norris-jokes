@@ -19,6 +19,13 @@ const JokeCard = (props) => {
   const classes = useStyles();
   const [elevation, setElevation] = useState(0);
 
+  const dispatch = useDispatch()
+  const {joke, loading, hasErrors} = useSelector(jokesSelector)
+
+  useEffect(() => {
+    dispatch(fetchJokes())
+  }, [])
+
   const handleOnMouseMove = () => {
     setElevation(5)
   }
@@ -26,13 +33,6 @@ const JokeCard = (props) => {
   const handleOnMouseOut = () => {
     setElevation(0)
   }
-
-  const dispatch = useDispatch()
-  const {joke, loading, hasErrors} = useSelector(jokesSelector)
-
-  useEffect(() => {
-    dispatch(fetchJokes())
-  }, [])
 
   const handleOnClick = () => {
     console.log('clicking paper')
