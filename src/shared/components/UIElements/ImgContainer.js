@@ -14,9 +14,7 @@ const ImgContainer = (props) => {
   const classes = useStyles();
 
   return (
-    <React.Fragment>
-      <img className={classes.container} src={props.image} alt='Chuck does not exist.' />
-    </React.Fragment>
+    <img className={classes.container} src={props.image} alt='Chuck does not exist.' />
   );
 };
 

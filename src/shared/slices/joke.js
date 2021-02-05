@@ -51,3 +51,7 @@ export function fetchJokes() {
     }
   }
 }
+
+//TODO: create thunk actions:
+// 1) for fetch random jokes from category
+// 2) free text search - choosing randomly one

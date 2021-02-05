@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Chip } from '@material-ui/core';
+import { Chip, CircularProgress } from '@material-ui/core';
 import {useDispatch, useSelector} from 'react-redux'
 
 import {fetchCategories, categoriesSelector} from '../../shared/slices/categories'
@@ -36,7 +36,8 @@ const JokeCategories = (props) => {
 
   return(
     <div className={classes.root}>
-      {categories.map((data, index) => {
+      {loading && <CircularProgress/>}
+      {!loading && categories.map((data, index) => {
         return (
           <li key={index}>
             <Chip
