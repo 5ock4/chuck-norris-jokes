@@ -1,21 +1,24 @@
-import { React, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Chip, CircularProgress, Typography } from '@material-ui/core';
-import {useDispatch, useSelector} from 'react-redux';
+import { React, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Chip, CircularProgress, Typography } from "@material-ui/core";
+import { useDispatch, useSelector } from "react-redux";
 
-import {fetchRandomJoke} from '../../shared/slices/joke'
-import {fetchCategories, categoriesSelector} from '../../shared/slices/categories'
-import {setCategory, categorySelector} from '../../shared/slices/category'
+import { fetchRandomJoke } from "../../shared/slices/joke";
+import {
+  fetchCategories,
+  categoriesSelector,
+} from "../../shared/slices/categories";
+import { setCategory, categorySelector } from "../../shared/slices/category";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    justifyContent: 'center',
-    flexWrap: 'wrap',
-    '& > *': {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    "& > *": {
       margin: theme.spacing(0.5),
     },
-    listStyle: 'none',
+    listStyle: "none",
   },
   chip: {
     margin: theme.spacing(0.5),
@@ -24,17 +27,17 @@ const useStyles = makeStyles((theme) => ({
 
 const JokeCategories = () => {
   const classes = useStyles();
-  const dispatch = useDispatch()
-  const {categories, loading, hasErrors} = useSelector(categoriesSelector);
-  const {category} = useSelector(categorySelector);
+  const dispatch = useDispatch();
+  const { categories, loading, hasErrors } = useSelector(categoriesSelector);
+  const { category } = useSelector(categorySelector);
 
   useEffect(() => {
-    dispatch(fetchCategories())
-  }, [dispatch])
+    dispatch(fetchCategories());
+  }, [dispatch]);
 
   const handleClick = (data) => {
     if (category === data) {
-      dispatch(setCategory(null))
+      dispatch(setCategory(null));
       dispatch(fetchRandomJoke(null));
     } else {
       dispatch(setCategory(data));
@@ -42,27 +45,30 @@ const JokeCategories = () => {
     }
   };
 
-  return(
+  return (
     <div className={classes.root}>
-      {loading && <CircularProgress/>}
-      {!loading && !hasErrors && categories.map((data, index) => {
-        return (
-          <li key={index}>
-            <Chip
-              label={data}
-              onClick={() => handleClick(data)}
-              color={data===category ? 'primary' : 'secondary'}
-              className={classes.chip}
-            />
-          </li>
-        )
-      })}
-      {hasErrors && 
-        <Typography variant="body1" align='left'>
+      {loading && <CircularProgress />}
+      {!loading &&
+        !hasErrors &&
+        categories.map((data, index) => {
+          return (
+            <li key={index}>
+              <Chip
+                label={data}
+                onClick={() => handleClick(data)}
+                color={data === category ? "primary" : "secondary"}
+                className={classes.chip}
+              />
+            </li>
+          );
+        })}
+      {hasErrors && (
+        <Typography variant="body1" align="left">
           No categories found.
-        </Typography>}
+        </Typography>
+      )}
     </div>
   );
-}
+};
 
 export default JokeCategories;
