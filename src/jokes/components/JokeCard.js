@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Paper, CircularProgress, Card, CardContent} from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux';
 
-import {fetchJokes, jokesSelector} from '../../shared/slices/joke'
+import {fetchRandomJoke, jokesSelector} from '../../shared/slices/joke'
+import {categorySelector} from '../../shared/slices/category'
 
 const useStyles = makeStyles({
   root: {
@@ -21,10 +22,11 @@ const JokeCard = (props) => {
 
   const dispatch = useDispatch()
   const {joke, loading, hasErrors} = useSelector(jokesSelector)
+  const {category} = useSelector(categorySelector);
 
   useEffect(() => {
-    dispatch(fetchJokes())
-  }, [])
+    dispatch(fetchRandomJoke())
+  }, [dispatch])
 
   const handleOnMouseMove = () => {
     setElevation(5)
@@ -36,7 +38,7 @@ const JokeCard = (props) => {
 
   const handleOnClick = () => {
     console.log('clicking paper')
-    dispatch(fetchJokes())
+    dispatch(fetchRandomJoke(category))
   }
 
   return (

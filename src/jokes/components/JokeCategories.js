@@ -3,7 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Chip, CircularProgress } from '@material-ui/core';
 import {useDispatch, useSelector} from 'react-redux'
 
+import {fetchRandomJoke} from '../../shared/slices/joke'
 import {fetchCategories, categoriesSelector} from '../../shared/slices/categories'
+import {setCategory, categorySelector} from '../../shared/slices/category'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,18 +22,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const JokeCategories = (props) => {
+const JokeCategories = () => {
   const classes = useStyles();
-
   const dispatch = useDispatch()
-  const {categories, loading, hasErrors} = useSelector(categoriesSelector)
+  const {categories, loading, hasErrors} = useSelector(categoriesSelector);
+  const {category} = useSelector(categorySelector);
 
   useEffect(() => {
     dispatch(fetchCategories())
-  }, [])
+  }, [dispatch])
 
-  const handleClick = () => {
-    console.info('You clicked the Chip.');
+  const handleClick = (data) => {
+    if (category === data) {
+      dispatch(setCategory(null))
+      dispatch(fetchRandomJoke(null));
+    } else {
+      dispatch(setCategory(data));
+      dispatch(fetchRandomJoke(data));
+    }
   };
 
   return(
@@ -42,8 +50,8 @@ const JokeCategories = (props) => {
           <li key={index}>
             <Chip
               label={data}
-              onClick={handleClick}
-              color='primary'
+              onClick={() => handleClick(data)}
+              color={data===category ? 'primary' : 'secondary'}
               className={classes.chip}
             />
           </li>

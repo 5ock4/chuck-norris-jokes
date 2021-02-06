@@ -36,17 +36,20 @@ export const jokesSelector = (state) => state.joke
 export default jokesSlice.reducer
 
 // Asynchronous thunk action
-export function fetchJokes() {
+export const fetchRandomJoke = (category) => {
   return async (dispatch) => {
     dispatch(getJokes())
 
     try {
-      const response = await axios.get(process.env.REACT_APP_CHUCK_NORRIS_JOKES_API + '/random')
-      const data = response.data.value
-      console.log(data)
+      const path = category == null ? '/random' : `/random?category=${category}`
+
+      const response = await axios.get(process.env.REACT_APP_CHUCK_NORRIS_JOKES_API + path);
+    
+      const data = response.data.value;
+      console.log('fetchRandomJoke');
       dispatch(getJokesSuccess(data))
     } catch (error) {
-      console.log(error)
+      console.log('Error in fetch joke.')
       dispatch(getJokesFailure())
     }
   }
@@ -54,4 +57,5 @@ export function fetchJokes() {
 
 //TODO: create thunk actions:
 // 1) for fetch random jokes from category
+
 // 2) free text search - choosing randomly one
