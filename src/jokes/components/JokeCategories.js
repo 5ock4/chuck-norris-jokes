@@ -1,7 +1,7 @@
-import { React, useEffect, useState } from 'react';
+import { React, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Chip, CircularProgress } from '@material-ui/core';
-import {useDispatch, useSelector} from 'react-redux'
+import { Chip, CircularProgress, Typography } from '@material-ui/core';
+import {useDispatch, useSelector} from 'react-redux';
 
 import {fetchRandomJoke} from '../../shared/slices/joke'
 import {fetchCategories, categoriesSelector} from '../../shared/slices/categories'
@@ -45,7 +45,7 @@ const JokeCategories = () => {
   return(
     <div className={classes.root}>
       {loading && <CircularProgress/>}
-      {!loading && categories.map((data, index) => {
+      {!loading && !hasErrors && categories.map((data, index) => {
         return (
           <li key={index}>
             <Chip
@@ -57,6 +57,10 @@ const JokeCategories = () => {
           </li>
         )
       })}
+      {hasErrors && 
+        <Typography variant="body1" align='left'>
+          No categories found.
+        </Typography>}
     </div>
   );
 }

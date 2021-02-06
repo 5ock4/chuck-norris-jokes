@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import {fetchRandomJoke, jokesSelector} from '../../shared/slices/joke'
 import {categorySelector} from '../../shared/slices/category'
+import {searchTextSelector} from '../../shared/slices/searchText'
 
 const useStyles = makeStyles({
   root: {
@@ -16,13 +17,13 @@ const useStyles = makeStyles({
   },
 });
 
-const JokeCard = (props) => {
+const JokeCard = () => {
   const classes = useStyles();
   const [elevation, setElevation] = useState(0);
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const {joke, loading, hasErrors} = useSelector(jokesSelector)
   const {category} = useSelector(categorySelector);
+  const {searchText} = useSelector(searchTextSelector);
 
   useEffect(() => {
     dispatch(fetchRandomJoke())
@@ -38,7 +39,11 @@ const JokeCard = (props) => {
 
   const handleOnClick = () => {
     console.log('clicking paper')
-    dispatch(fetchRandomJoke(category))
+    if (searchText.length !== 0) {
+      dispatch(fetchRandomJoke(category, searchText))
+    } else {
+      dispatch(fetchRandomJoke(category))
+    }
   }
 
   return (
@@ -51,8 +56,11 @@ const JokeCard = (props) => {
       <Card>
         <CardContent>
           {loading && <CircularProgress/>}
-          {!loading && <Typography variant="body1" align='left'>
+          {!loading && !hasErrors && <Typography variant="body1" align='left'>
             {joke}
+          </Typography>}
+          {hasErrors && <Typography variant="body1" align='left'>
+            No joke with phrase "<i>{searchText}</i>" found.
           </Typography>}
         </CardContent>
       </Card>
