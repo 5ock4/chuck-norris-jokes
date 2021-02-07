@@ -13,15 +13,15 @@ const jokesSlice = createSlice({
   name: "jokes",
   initialState,
   reducers: {
-    getJokes: (state) => {
+    setJokes: (state) => {
       state.loading = true;
     },
-    getJokesSuccess: (state, { payload }) => {
+    setJokesSuccess: (state, { payload }) => {
       state.joke = payload;
       state.loading = false;
       state.hasErrors = false;
     },
-    getJokesFailure: (state) => {
+    setJokesFailure: (state) => {
       state.loading = false;
       state.hasErrors = true;
     },
@@ -30,9 +30,9 @@ const jokesSlice = createSlice({
 
 // Three actions generated from the slice
 export const {
-  getJokes,
-  getJokesSuccess,
-  getJokesFailure,
+  setJokes,
+  setJokesSuccess,
+  setJokesFailure,
 } = jokesSlice.actions;
 
 // A selector
@@ -44,7 +44,7 @@ export default jokesSlice.reducer;
 // Asynchronous thunk action
 export const fetchRandomJoke = (category, searchText) => {
   return async (dispatch) => {
-    dispatch(getJokes());
+    dispatch(setJokes());
 
     try {
       const response = await axios.get(
@@ -54,11 +54,11 @@ export const fetchRandomJoke = (category, searchText) => {
       console.log(response);
       const data = getData(response);
       console.log("fetchRandomJoke");
-      dispatch(getJokesSuccess(data));
+      dispatch(setJokesSuccess(data));
     } catch (error) {
       console.log("Error in fetch joke.");
       console.log(error);
-      dispatch(getJokesFailure());
+      dispatch(setJokesFailure());
     }
   };
 };

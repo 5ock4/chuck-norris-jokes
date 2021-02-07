@@ -11,15 +11,15 @@ const categoriesSlice = createSlice({
   name: "categories",
   initialState,
   reducers: {
-    getCategories: (state) => {
+    setCategories: (state) => {
       state.loading = true;
     },
-    getCategoriesSuccess: (state, { payload }) => {
+    setCategoriesSuccess: (state, { payload }) => {
       state.categories = payload;
       state.loading = false;
       state.hasErrors = false;
     },
-    getCategoriesFailure: (state) => {
+    setCategoriesFailure: (state) => {
       state.loading = false;
       state.hasErrors = true;
     },
@@ -28,9 +28,9 @@ const categoriesSlice = createSlice({
 
 // Three actions generated from the slice
 export const {
-  getCategories,
-  getCategoriesSuccess,
-  getCategoriesFailure,
+  setCategories,
+  setCategoriesSuccess,
+  setCategoriesFailure,
 } = categoriesSlice.actions;
 
 // A selector
@@ -42,7 +42,7 @@ export default categoriesSlice.reducer;
 // Asynchronous thunk action
 export function fetchCategories() {
   return async (dispatch) => {
-    dispatch(getCategories());
+    dispatch(setCategories());
 
     try {
       const response = await axios.get(
@@ -51,10 +51,10 @@ export function fetchCategories() {
       const data = response.data;
       console.log("Fetched categories");
       console.log(data);
-      dispatch(getCategoriesSuccess(data));
+      dispatch(setCategoriesSuccess(data));
     } catch (error) {
       console.log(error);
-      dispatch(getCategoriesFailure());
+      dispatch(setCategoriesFailure());
     }
   };
 }
