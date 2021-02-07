@@ -14,7 +14,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
       margin: theme.spacing(3),
-      width: "25ch",
+      width:  theme.spacing(25),
+      height: theme.spacing(8)
     },
   },
 }));
@@ -41,6 +42,7 @@ const JokeForm = (props) => {
     <form className={classes.root} noValidate autoComplete="off">
       <TextField
         error={textTooShort}
+        helperText={textTooShort ? "Phrase is too short." : ""}
         id="standard-basic"
         label="Find joke with phrase"
         onChange={handleOnChange}

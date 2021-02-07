@@ -1,6 +1,14 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#004d40',
+    },
+    secondary: {
+      main: '#26a69a',
+    },
+  },
   overrides: {
     MuiCssBaseline: {
       "@global": {
@@ -9,8 +17,8 @@ const theme = createMuiTheme({
         },
         body: {
           textAlign: "center",
-          backgroundImage:
-            "linear-gradient(to right top, #ffffff, #f1f1f1, #e4e4e4, #d6d6d6, #c9c9c9);",
+          backgroundColor:
+            "#ededed",
         },
       },
     },

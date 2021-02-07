@@ -56,7 +56,7 @@ const JokeCategories = () => {
               <Chip
                 label={data}
                 onClick={() => handleClick(data)}
-                color={data === category ? "primary" : "secondary"}
+                color={data === category ? "primary" : "secondary" }
                 className={classes.chip}
               />
             </li>
