@@ -1,12 +1,12 @@
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createMuiTheme } from "@material-ui/core/styles"
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#004d40',
+      main: "#004d40",
     },
     secondary: {
-      main: '#26a69a',
+      main: "#26a69a",
     },
   },
   overrides: {
@@ -17,12 +17,11 @@ const theme = createMuiTheme({
         },
         body: {
           textAlign: "center",
-          backgroundColor:
-            "#ededed",
+          backgroundColor: "#ededed",
         },
       },
     },
   },
-});
+})
 
-export default theme;
+export default theme

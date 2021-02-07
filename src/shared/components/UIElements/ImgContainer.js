@@ -1,5 +1,5 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React from "react"
+import { makeStyles } from "@material-ui/core/styles"
 
 const useStyles = makeStyles((theme) => ({
   [theme.breakpoints.up("sm")]: {
@@ -7,10 +7,10 @@ const useStyles = makeStyles((theme) => ({
       marginRight: theme.spacing(4),
     },
   },
-}));
+}))
 
 const ImgContainer = (props) => {
-  const classes = useStyles();
+  const classes = useStyles()
 
   return (
     <img
@@ -18,7 +18,7 @@ const ImgContainer = (props) => {
       src={props.image}
       alt="Chuck does not exist."
     />
-  );
-};
+  )
+}
 
-export default ImgContainer;
+export default ImgContainer

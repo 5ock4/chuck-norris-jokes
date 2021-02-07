@@ -1,10 +1,10 @@
-import { Box, Container } from "@material-ui/core";
-import { ThemeProvider } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import { Box, Container } from "@material-ui/core"
+import { ThemeProvider } from "@material-ui/core/styles"
+import CssBaseline from "@material-ui/core/CssBaseline"
 // import {Helmet} from 'react-helmet'
 
-import Jokes from "./jokes/pages/Jokes";
-import theme from "./shared/themes/theme";
+import Jokes from "./jokes/pages/Jokes"
+import theme from "./shared/themes/theme"
 
 const App = () => {
   return (
@@ -16,7 +16,7 @@ const App = () => {
         </Box>
       </Container>
     </ThemeProvider>
-  );
-};
+  )
+}
 
-export default App;
+export default App

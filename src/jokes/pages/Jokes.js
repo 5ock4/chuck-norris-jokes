@@ -1,12 +1,12 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { Box } from "@material-ui/core";
+import React from "react"
+import { makeStyles } from "@material-ui/core/styles"
+import { Box } from "@material-ui/core"
 
-import JokeCard from "../components/JokeCard";
-import JokeCategories from "../components/JokeCategories";
-import JokeForm from "../components/JokeForm";
-import ImgContainer from "../../shared/components/UIElements/ImgContainer";
-import chuckImg from "../../shared/assets/chuck.png";
+import JokeCard from "../components/JokeCard"
+import JokeCategories from "../components/JokeCategories"
+import JokeForm from "../components/JokeForm"
+import ImgContainer from "../../shared/components/UIElements/ImgContainer"
+import chuckImg from "../../shared/assets/chuck.png"
 
 const useStyles = makeStyles((theme) => ({
   boxPos: {
@@ -17,10 +17,10 @@ const useStyles = makeStyles((theme) => ({
       padding: "20px",
     },
   },
-}));
+}))
 
 const Jokes = () => {
-  const classes = useStyles();
+  const classes = useStyles()
 
   return (
     <React.Fragment>
@@ -31,7 +31,7 @@ const Jokes = () => {
       <JokeForm />
       <JokeCategories />
     </React.Fragment>
-  );
-};
+  )
+}
 
-export default Jokes;
+export default Jokes

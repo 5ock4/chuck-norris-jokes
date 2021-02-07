@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { Paper, CircularProgress, Card, CardContent } from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from "react"
+import { makeStyles } from "@material-ui/core/styles"
+import { Paper, CircularProgress, Card, CardContent } from "@material-ui/core"
+import Typography from "@material-ui/core/Typography"
+import { useDispatch, useSelector } from "react-redux"
 
-import { fetchRandomJoke, jokesSelector } from "../slices/joke";
-import { categorySelector } from "../slices/category";
-import { searchTextSelector } from "../slices/searchText";
+import { getRandomJoke, jokesSelector } from "../slices/joke"
+import { categorySelector } from "../slices/category"
+import { searchTextSelector } from "../slices/searchText"
+import { fetchJoke } from "../services/chuckNorrisAPI"
 
 const useStyles = makeStyles({
   root: {
@@ -15,36 +16,36 @@ const useStyles = makeStyles({
       cursor: "pointer",
     },
   },
-});
+})
 
 const JokeCard = () => {
-  const classes = useStyles();
-  const [elevation, setElevation] = useState(0);
-  const dispatch = useDispatch();
-  const { joke, loading, hasErrors } = useSelector(jokesSelector);
-  const { category } = useSelector(categorySelector);
-  const { searchText } = useSelector(searchTextSelector);
+  const classes = useStyles()
+  const [elevation, setElevation] = useState(0)
+  const dispatch = useDispatch()
+  const { joke, loading, hasErrors } = useSelector(jokesSelector)
+  const { category } = useSelector(categorySelector)
+  const { searchText } = useSelector(searchTextSelector)
 
   useEffect(() => {
-    dispatch(fetchRandomJoke());
-  }, [dispatch]);
+    dispatch(getRandomJoke(fetchJoke))
+  }, [dispatch])
 
   const handleOnMouseMove = () => {
-    setElevation(5);
-  };
+    setElevation(5)
+  }
 
   const handleOnMouseOut = () => {
-    setElevation(0);
-  };
+    setElevation(0)
+  }
 
   const handleOnClick = () => {
-    console.log("clicking paper");
+    console.log("clicking paper")
     if (searchText.length !== 0) {
-      dispatch(fetchRandomJoke(category, searchText));
+      dispatch(getRandomJoke(fetchJoke, category, searchText))
     } else {
-      dispatch(fetchRandomJoke(category));
+      dispatch(getRandomJoke(fetchJoke, category))
     }
-  };
+  }
 
   return (
     <Paper
@@ -70,7 +71,7 @@ const JokeCard = () => {
         </CardContent>
       </Card>
     </Paper>
-  );
-};
+  )
+}
 
-export default JokeCard;
+export default JokeCard
