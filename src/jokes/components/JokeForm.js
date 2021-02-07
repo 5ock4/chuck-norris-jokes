@@ -24,7 +24,6 @@ const JokeForm = (props) => {
   const dispatch = useDispatch();
   const { searchText, textTooShort } = useSelector(searchTextSelector);
 
-  //TOOD: find a way how to get fresh data from redux in handler
   const handleOnChange = (e) => {
     dispatch(setSearchText(e.target.value));
     if (e.target.value.length > 0) {
