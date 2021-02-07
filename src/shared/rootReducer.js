@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 
-import jokeReducer from "./joke";
-import categoriesReducer from "./categories";
-import categoryReducer from "./category";
-import searchTextReducer from "./searchText";
+import jokeReducer from "../jokes/slices/joke";
+import categoriesReducer from "../jokes/slices/categories";
+import categoryReducer from "../jokes/slices/category";
+import searchTextReducer from "../jokes/slices/searchText";
 
 const rootReducer = combineReducers({
   joke: jokeReducer,

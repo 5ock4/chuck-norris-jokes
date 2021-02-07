@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-import { getPath, getData } from "../util/utils";
+import { getPath, getData } from "../../shared/util/utils";
 
 export const initialState = {
   loading: false,
@@ -13,7 +13,7 @@ const jokesSlice = createSlice({
   name: "jokes",
   initialState,
   reducers: {
-    setJokes: (state) => {
+    setJokesLoading: (state) => {
       state.loading = true;
     },
     setJokesSuccess: (state, { payload }) => {
@@ -30,7 +30,7 @@ const jokesSlice = createSlice({
 
 // Actions generated from the slice
 export const {
-  setJokes,
+  setJokesLoading,
   setJokesSuccess,
   setJokesFailure,
 } = jokesSlice.actions;
@@ -44,7 +44,7 @@ export default jokesSlice.reducer;
 // Asynchronous thunk action
 export const fetchRandomJoke = (category, searchText) => {
   return async (dispatch) => {
-    dispatch(setJokes());
+    dispatch(setJokesLoading());
 
     try {
       const response = await axios.get(

@@ -4,9 +4,9 @@ import { Paper, CircularProgress, Card, CardContent } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchRandomJoke, jokesSelector } from "../../shared/slices/joke";
-import { categorySelector } from "../../shared/slices/category";
-import { searchTextSelector } from "../../shared/slices/searchText";
+import { fetchRandomJoke, jokesSelector } from "../slices/joke";
+import { categorySelector } from "../slices/category";
+import { searchTextSelector } from "../slices/searchText";
 
 const useStyles = makeStyles({
   root: {

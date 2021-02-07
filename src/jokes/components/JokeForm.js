@@ -3,12 +3,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchRandomJoke } from "../../shared/slices/joke";
+import { fetchRandomJoke } from "../slices/joke";
 import {
   setSearchText,
   searchTextSelector,
-} from "../../shared/slices/searchText";
-import { setCategory } from "../../shared/slices/category";
+} from "../slices/searchText";
+import { setCategory } from "../slices/category";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,15 +39,17 @@ const JokeForm = (props) => {
   });
 
   return (
-    <form className={classes.root} noValidate autoComplete="off">
+    <div className={classes.root}>
       <TextField
+        value={searchText}
         error={textTooShort}
         helperText={textTooShort ? "Phrase is too short." : ""}
         id="standard-basic"
         label="Find joke with phrase"
         onChange={handleOnChange}
+        
       />
-    </form>
+    </div>
   );
 };
 

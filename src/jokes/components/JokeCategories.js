@@ -3,12 +3,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Chip, CircularProgress, Typography } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchRandomJoke } from "../../shared/slices/joke";
+import { fetchRandomJoke } from "../slices/joke";
 import {
   fetchCategories,
   categoriesSelector,
-} from "../../shared/slices/categories";
-import { setCategory, categorySelector } from "../../shared/slices/category";
+} from "../slices/categories";
+import { setCategory, categorySelector } from "../slices/category";
+import { setSearchText } from "../slices/searchText"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,6 +37,7 @@ const JokeCategories = () => {
   }, [dispatch]);
 
   const handleClick = (data) => {
+    // dispatch(setSearchText(null, "")) //TODO
     if (category === data) {
       dispatch(setCategory(null));
       dispatch(fetchRandomJoke(null));
