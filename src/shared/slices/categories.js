@@ -26,17 +26,17 @@ const categoriesSlice = createSlice({
   },
 });
 
-// Three actions generated from the slice
+// Actions generated from the slice
 export const {
   setCategories,
   setCategoriesSuccess,
   setCategoriesFailure,
 } = categoriesSlice.actions;
 
-// A selector
+// Selector
 export const categoriesSelector = (state) => state.categories;
 
-// The reducer
+// Reducer
 export default categoriesSlice.reducer;
 
 // Asynchronous thunk action

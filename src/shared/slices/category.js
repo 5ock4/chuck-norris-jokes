@@ -14,11 +14,11 @@ const categorySlice = createSlice({
   },
 });
 
-// action generated from the slice
+// Action generated from the slice
 export const { setCategory } = categorySlice.actions;
 
-// A selector
+// Selector
 export const categorySelector = (state) => state.category;
 
-// The reducer
+// Reducer
 export default categorySlice.reducer;

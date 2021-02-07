@@ -20,11 +20,11 @@ const searchTextSlice = createSlice({
   },
 });
 
-// action generated from the slice
+// Action generated from the slice
 export const { setSearchText } = searchTextSlice.actions;
 
-// A selector
+// Selector
 export const searchTextSelector = (state) => state.searchText;
 
-// The reducer
+// Reducer
 export default searchTextSlice.reducer;

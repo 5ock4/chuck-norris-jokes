@@ -28,17 +28,17 @@ const jokesSlice = createSlice({
   },
 });
 
-// Three actions generated from the slice
+// Actions generated from the slice
 export const {
   setJokes,
   setJokesSuccess,
   setJokesFailure,
 } = jokesSlice.actions;
 
-// A selector
+// Selector
 export const jokesSelector = (state) => state.joke;
 
-// The reducer
+// Reducer
 export default jokesSlice.reducer;
 
 // Asynchronous thunk action
