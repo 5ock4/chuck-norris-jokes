@@ -19,6 +19,9 @@ const theme = createMuiTheme({
           textAlign: "center",
           backgroundColor: "#ededed",
         },
+        "*": {
+          userSelect: "none",
+        },
       },
     },
   },
