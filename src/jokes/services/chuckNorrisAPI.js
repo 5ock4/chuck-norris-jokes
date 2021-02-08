@@ -20,9 +20,7 @@ export const fetchJoke = async (category, searchText) => {
   }
 
   if (response.data.value === undefined) {
-    console.log(response.data.total)
     const randInt = Math.floor(Math.random() * response.data.total)
-    console.log(randInt)
     return response.data.result[randInt].value
   }
 

@@ -1,9 +1,9 @@
-import React from 'react'
-import { render as rtlRender } from '@testing-library/react'
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
+import React from "react"
+import { render as rtlRender } from "@testing-library/react"
+import { createStore } from "redux"
+import { Provider } from "react-redux"
 
-import reducer from '../rootReducer'
+import reducer from "../rootReducer"
 
 function render(
   ui,
@@ -20,6 +20,6 @@ function render(
 }
 
 // re-export everything
-export * from '@testing-library/react'
+export * from "@testing-library/react"
 // override render method
 export { render }

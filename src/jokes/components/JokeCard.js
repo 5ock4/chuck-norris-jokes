@@ -39,7 +39,6 @@ const JokeCard = () => {
   }
 
   const handleOnClick = () => {
-    console.log("clicking paper")
     if (searchText.length !== 0) {
       dispatch(getRandomJoke(fetchJoke, category, searchText))
     } else {

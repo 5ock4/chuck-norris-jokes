@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { getRandomJoke } from "../slices/joke"
 import { getCategories, categoriesSelector } from "../slices/categories"
 import { setCategory, categorySelector } from "../slices/category"
-import { setSearchText } from "../slices/searchText"
 import { fetchJoke } from "../services/chuckNorrisAPI"
 import { fetchCategories } from "../services/chuckNorrisAPI"
 
@@ -36,7 +35,6 @@ const JokeCategories = () => {
   }, [dispatch])
 
   const handleClick = (data) => {
-    // dispatch(setSearchText(null, "")) //TODO
     if (category === data) {
       dispatch(setCategory(null))
       dispatch(getRandomJoke(fetchJoke, null))
