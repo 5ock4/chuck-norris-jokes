@@ -16,6 +16,9 @@ const useStyles = makeStyles({
       cursor: "pointer",
     },
   },
+  noselect: {
+    userSelect: "none",
+  },
 })
 
 const JokeCard = () => {
@@ -58,7 +61,11 @@ const JokeCard = () => {
         <CardContent>
           {loading && <CircularProgress />}
           {!loading && !hasErrors && (
-            <Typography variant="body1" align="left">
+            <Typography
+              className={classes.noselect}
+              variant="body1"
+              align="left"
+            >
               {joke}
             </Typography>
           )}
