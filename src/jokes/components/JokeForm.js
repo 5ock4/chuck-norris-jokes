@@ -1,11 +1,11 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useRef } from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import TextField from "@material-ui/core/TextField"
 import { useDispatch, useSelector } from "react-redux"
 
 import { getRandomJoke } from "../slices/joke"
 import { setSearchText, searchTextSelector } from "../slices/searchText"
-import { setCategory } from "../slices/category"
+import { setCategory, categorySelector } from "../slices/category"
 import { fetchJoke } from "../services/chuckNorrisAPI"
 
 const useStyles = makeStyles((theme) => ({
@@ -18,10 +18,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const JokeForm = (props) => {
+const JokeForm = () => {
   const classes = useStyles()
   const dispatch = useDispatch()
   const { searchText, textTooShort } = useSelector(searchTextSelector)
+  const { category } = useSelector(categorySelector)
 
   const handleOnChange = (e) => {
     dispatch(setSearchText(e.target.value))
@@ -30,8 +31,20 @@ const JokeForm = (props) => {
     }
   }
 
+  const prevSearchTextRef = useRef()
   useEffect(() => {
-    if (!textTooShort && searchText.length !== 0) {
+    prevSearchTextRef.current = searchText
+  })
+  const prevSearchText = prevSearchTextRef.current
+
+  useEffect(() => {
+    if (
+      searchText.length !== 0 &&
+      prevSearchText.length !== 0 &&
+      category !== null
+    ) {
+      dispatch(setSearchText(""))
+    } else if (!textTooShort && searchText.length !== 0) {
       dispatch(getRandomJoke(fetchJoke, null, searchText))
     }
   })
