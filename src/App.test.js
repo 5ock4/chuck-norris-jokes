@@ -8,5 +8,5 @@ import App from "./App"
 it("Renders the connected app with initialState", () => {
   render(<App />, { initialState: { joke: "Some joke" } })
 
-  expect(screen.getByText(/some joke/i)).toBeInTheDocument()
+  expect(screen.getByText(/find joke with phrase/i)).toBeInTheDocument()
 })
