@@ -1,12 +1,15 @@
 import React from "react"
-// We're using our own custom render function and not RTL's render
-// our custom utils also re-export everything from RTL
-// so we can import fireEvent and screen here as well
 import { render, fireEvent, screen } from "./shared/utils/testUtils"
+
 import App from "./App"
+import flushPromises from "flush-promises"
 
-it("Renders the connected app with initialState", () => {
-  render(<App />, { initialState: { joke: "Some joke" } })
+jest.mock("./jokes/services/chuckNorrisAPI");
 
-  expect(screen.getByText(/find joke with phrase/i)).toBeInTheDocument()
+it("Displays random joke and categories", async () => {
+  render(<App />)
+  await flushPromises()
+  // console.log(screen.debug())
+  expect(screen.getByText(/joke:random/i)).toBeInTheDocument()
+  expect
 })
