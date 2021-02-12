@@ -1,10 +1,10 @@
 export const fetchJoke = async (category, searchText) => {
   if (searchText != null) {
-    return "Joke:searchQuerry"
+    return Promise.resolve(process.env.JOKE_SEARCH_QUERRY)
   } else if (category == null) {
-    return "Joke:random"
+    return Promise.resolve(process.env.JOKE_RANDOM)
   } else {
-    return "Joke:categoryRandom"
+    return Promise.resolve(process.env.JOKE_SEARCH_QUERRY)
   }
 }
 

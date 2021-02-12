@@ -10,6 +10,5 @@ it("Displays random joke and categories", async () => {
   render(<App />)
   await flushPromises()
   // console.log(screen.debug())
-  expect(screen.getByText(/joke:random/i)).toBeInTheDocument()
-  expect
+  expect(screen.getByText(process.env.JOKE_RANDOM)).toBeInTheDocument()
 })
