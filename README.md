@@ -6,6 +6,8 @@ Package manager: yarn
 
 Starter kit: create-react-app
 
+Tests: Jest + React Testing Library
+
 Used API: https://api.chucknorris.io/
 
 Deployed on Github pages: https://5ock4.github.io/chuck-norris-jokes/
