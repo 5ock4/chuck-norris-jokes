@@ -39,12 +39,12 @@ export const jokesSelector = (state) => state.joke
 export default jokesSlice.reducer
 
 // Asynchronous thunk action
-export const getRandomJoke = (fetchJoke, category, searchText) => {
+export const getRandomJoke = (fetchJoke, params) => {
   return async (dispatch) => {
     dispatch(setJokesLoading())
 
     try {
-      const data = await fetchJoke(category, searchText)
+      const data = await fetchJoke(params)
       dispatch(setJokesSuccess(data))
     } catch (error) {
       dispatch(setJokesFailure())

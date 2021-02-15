@@ -7,7 +7,11 @@ import { useDispatch, useSelector } from "react-redux"
 import { getRandomJoke, jokesSelector } from "../slices/joke"
 import { categorySelector } from "../slices/category"
 import { searchTextSelector } from "../slices/searchText"
-import { fetchJoke } from "../services/chuckNorrisAPI"
+import {
+  fetchRandomJoke,
+  fetchQuerriedRandomJoke,
+  fetchJokeFromCategory,
+} from "../services/chuckNorrisAPI"
 
 const useStyles = makeStyles({
   root: {
@@ -27,7 +31,7 @@ const JokeCard = () => {
   const { searchText } = useSelector(searchTextSelector)
 
   useEffect(() => {
-    dispatch(getRandomJoke(fetchJoke))
+    dispatch(getRandomJoke(fetchRandomJoke))
   }, [dispatch])
 
   const handleOnMouseMove = () => {
@@ -40,9 +44,16 @@ const JokeCard = () => {
 
   const handleOnClick = () => {
     if (searchText.length !== 0) {
-      dispatch(getRandomJoke(fetchJoke, category, searchText))
+      dispatch(
+        getRandomJoke(fetchQuerriedRandomJoke, {
+          category: category,
+          searchText: searchText,
+        })
+      )
+    } else if (category !== null) {
+      dispatch(getRandomJoke(fetchJokeFromCategory, { category: category }))
     } else {
-      dispatch(getRandomJoke(fetchJoke, category))
+      dispatch(getRandomJoke(fetchRandomJoke))
     }
   }
 

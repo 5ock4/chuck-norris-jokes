@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { getRandomJoke } from "../slices/joke"
 import { setSearchText, searchTextSelector } from "../slices/searchText"
 import { setCategory, categorySelector } from "../slices/category"
-import { fetchJoke } from "../services/chuckNorrisAPI"
+import { fetchQuerriedRandomJoke } from "../services/chuckNorrisAPI"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,7 +45,9 @@ const JokeForm = () => {
     ) {
       dispatch(setSearchText(""))
     } else if (!textTooShort && searchText.length !== 0) {
-      dispatch(getRandomJoke(fetchJoke, null, searchText))
+      dispatch(
+        getRandomJoke(fetchQuerriedRandomJoke, { searchText: searchText })
+      )
     }
   })
 

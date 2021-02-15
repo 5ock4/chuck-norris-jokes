@@ -6,7 +6,10 @@ import { useDispatch, useSelector } from "react-redux"
 import { getRandomJoke } from "../slices/joke"
 import { getCategories, categoriesSelector } from "../slices/categories"
 import { setCategory, categorySelector } from "../slices/category"
-import { fetchJoke } from "../services/chuckNorrisAPI"
+import {
+  fetchRandomJoke,
+  fetchJokeFromCategory,
+} from "../services/chuckNorrisAPI"
 import { fetchCategories } from "../services/chuckNorrisAPI"
 
 const useStyles = makeStyles((theme) => ({
@@ -37,10 +40,10 @@ const JokeCategories = () => {
   const handleClick = (data) => {
     if (category === data) {
       dispatch(setCategory(null))
-      dispatch(getRandomJoke(fetchJoke, null))
+      dispatch(getRandomJoke(fetchRandomJoke))
     } else {
       dispatch(setCategory(data))
-      dispatch(getRandomJoke(fetchJoke, data))
+      dispatch(getRandomJoke(fetchJokeFromCategory, { category: data }))
     }
   }
 

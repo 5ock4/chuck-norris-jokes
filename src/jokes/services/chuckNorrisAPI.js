@@ -1,36 +1,40 @@
 import axios from "axios"
 
 const CHUCK_NORRIS_JOKES_API = "https://api.chucknorris.io/jokes"
+const PATH_RANDOM = "/random"
+const PATH_CATEGORY = "/random?category="
+const PATH_QUERY = "/search?query="
+const PATH_CATEGORIES = "/categories"
 
-export const fetchJoke = async (category, searchText) => {
-  let path
+export const fetchRandomJoke = async () => {
+  const response = await axios.get(CHUCK_NORRIS_JOKES_API + PATH_RANDOM)
 
-  if (searchText != null) {
-    path = `/search?query=${searchText}`
-  } else if (category == null) {
-    path = "/random"
-  } else {
-    path = `/random?category=${category}`
-  }
+  return response.data.value
+}
 
-  const response = await axios.get(CHUCK_NORRIS_JOKES_API + path)
+export const fetchQuerriedRandomJoke = async (params) => {
+  const response = await axios.get(
+    CHUCK_NORRIS_JOKES_API + PATH_QUERY + params["searchText"]
+  )
 
   if (response.data.total === 0) {
-    return `No joke with phrase "${searchText}" found.`
+    return `No joke with phrase "${params["searchText"]}" found.`
   }
 
-  if (response.data.value === undefined) {
-    const randInt = Math.floor(Math.random() * response.data.total)
-    return response.data.result[randInt].value
-  }
+  const randInt = Math.floor(Math.random() * response.data.total)
+  return response.data.result[randInt].value
+}
+
+export const fetchJokeFromCategory = async (params) => {
+  const response = await axios.get(
+    CHUCK_NORRIS_JOKES_API + PATH_CATEGORY + params["category"]
+  )
 
   return response.data.value
 }
 
 export const fetchCategories = async () => {
-  const response = await axios.get(
-    process.env.REACT_APP_CHUCK_NORRIS_JOKES_API + "/categories"
-  )
+  const response = await axios.get(CHUCK_NORRIS_JOKES_API + PATH_CATEGORIES)
 
   return response.data
 }

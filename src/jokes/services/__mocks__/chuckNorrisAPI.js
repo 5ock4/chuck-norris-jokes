@@ -1,13 +1,21 @@
-export const fetchJoke = async (category, searchText) => {
-  if (searchText != null) {
-    return Promise.resolve(process.env.JOKE_SEARCH_QUERRY + ":" + searchText)
-  } else if (category == null) {
-    return Promise.resolve(process.env.JOKE_RANDOM)
-  } else {
-    return Promise.resolve(process.env.JOKE_CATEGORY_RANDOM)
-  }
+export const TST_JOKE_RANDOM = "joke:random"
+export const TST_JOKE_CATEGORY_RANDOM = "joke:categoryRandom"
+export const TST_JOKE_SEARCH_QUERRY = "joke:searchQuerry"
+export const TST_CAT1 = "cat1"
+export const TST_CAT2 = "cat2"
+
+export const fetchRandomJoke = async () => {
+  return Promise.resolve(TST_JOKE_RANDOM)
+}
+
+export const fetchQuerriedRandomJoke = async (params) => {
+  return Promise.resolve(TST_JOKE_SEARCH_QUERRY + ":" + params["searchText"])
+}
+
+export const fetchJokeFromCategory = async () => {
+  return Promise.resolve(TST_JOKE_CATEGORY_RANDOM)
 }
 
 export const fetchCategories = async () => {
-  return [process.env.CAT1, process.env.CAT2]
+  return Promise.resolve([TST_CAT1, TST_CAT2])
 }
