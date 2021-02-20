@@ -20,15 +20,18 @@ const useStyles = makeStyles({
       cursor: "pointer",
     },
   },
+  card: {
+    backgroundColor: (props) => !props.joke ? "red" : null
+  }
 })
 
 const JokeCard = () => {
-  const classes = useStyles()
   const [elevation, setElevation] = useState(0)
   const dispatch = useDispatch()
   const { joke, loading, hasErrors } = useSelector(jokesSelector)
   const { category } = useSelector(categorySelector)
   const { searchText } = useSelector(searchTextSelector)
+  const classes = useStyles({joke})
 
   useEffect(() => {
     dispatch(getRandomJoke(fetchRandomJoke))
@@ -66,14 +69,14 @@ const JokeCard = () => {
       onClick={handleOnClick}
     >
       <Card>
-        <CardContent>
+        <CardContent className={classes.card}>
           {loading && <CircularProgress />}
-          {!loading && !hasErrors && (
+          {!loading && !hasErrors && joke && (
             <Typography variant="body1" align="left">
               {joke}
             </Typography>
           )}
-          {hasErrors && (
+          {(hasErrors || !joke) && (
             <Typography variant="body1" align="left">
               No joke with phrase "<i>{searchText}</i>" found.
             </Typography>

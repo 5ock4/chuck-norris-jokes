@@ -18,7 +18,7 @@ export const fetchQuerriedRandomJoke = async (params) => {
   )
 
   if (response.data.total === 0) {
-    return `No joke with phrase "${params["searchText"]}" found.`
+    return false
   }
 
   const randInt = Math.floor(Math.random() * response.data.total)
