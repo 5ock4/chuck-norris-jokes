@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import TextField from "@material-ui/core/TextField"
 import { useDispatch, useSelector } from "react-redux"
@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
 const JokeForm = () => {
   const classes = useStyles()
   const dispatch = useDispatch()
+  const [loading, setLoading] = useState(false)
   const { searchText, textTooShort } = useSelector(searchTextSelector)
   const { category } = useSelector(categorySelector)
 
@@ -38,16 +39,26 @@ const JokeForm = () => {
   const prevSearchText = prevSearchTextRef.current
 
   useEffect(() => {
-    if (
-      searchText.length !== 0 &&
-      prevSearchText.length !== 0 &&
-      category !== null
-    ) {
-      dispatch(setSearchText(""))
-    } else if (!textTooShort && searchText.length !== 0) {
-      dispatch(
-        getRandomJoke(fetchQuerriedRandomJoke, { searchText: searchText })
-      )
+    console.log("Use effect: call in the beginning")
+    setLoading(true)
+    const timer = setTimeout(() => {
+    // TODO: Call only the last timer
+      if (
+        searchText.length !== 0 &&
+        prevSearchText.length !== 0 &&
+        category !== null
+      ) {
+        dispatch(setSearchText(""))
+      } else if (!textTooShort && searchText.length !== 0) {
+        dispatch(
+          getRandomJoke(fetchQuerriedRandomJoke, { searchText: searchText })
+        )
+      }
+
+      setLoading(false)
+    }, 5000)
+    return () => {
+      console.log("Use effect: call in return")
     }
   })
 

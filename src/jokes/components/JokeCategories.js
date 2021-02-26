@@ -37,13 +37,13 @@ const JokeCategories = () => {
     dispatch(getCategories(fetchCategories))
   }, [dispatch])
 
-  const handleClick = (data) => {
-    if (category === data) {
+  const handleClick = (e) => {
+    if (category === e.target.textContent) {
       dispatch(setCategory(null))
       dispatch(getRandomJoke(fetchRandomJoke))
     } else {
-      dispatch(setCategory(data))
-      dispatch(getRandomJoke(fetchJokeFromCategory, { category: data }))
+      dispatch(setCategory(e.target.textContent))
+      dispatch(getRandomJoke(fetchJokeFromCategory, { category: e.target.textContent }))
     }
   }
 
@@ -52,16 +52,15 @@ const JokeCategories = () => {
       {loading && <CircularProgress />}
       {!loading &&
         !hasErrors &&
-        categories.map((data, index) => {
+        categories.map((data) => {
           return (
-            <li key={index}>
               <Chip
+                key={data}
                 label={data}
-                onClick={() => handleClick(data)}
+                onClick={handleClick}
                 color={data === category ? "primary" : "secondary"}
                 className={classes.chip}
               />
-            </li>
           )
         })}
       {hasErrors && (
